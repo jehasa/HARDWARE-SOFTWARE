@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computación: Lo Básico - App de Aprendizaje</title>
+    <title>Computación Avanzada - Enciclopedia de Fundamentos y Ensamblaje</title>
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             --app-dark: #0b192c;
-            --card-bg: rgba(15, 32, 67, 0.85);
+            --card-bg: rgba(15, 32, 67, 0.95);
             --text-color: #ffffff;
             --text-muted: #cbd5e1;
             --accent-green: #00875a;
             --accent-blue: #00b4d8;
-            --border-glow: rgba(0, 180, 216, 0.3);
+            --accent-orange: #f39c12;
+            --accent-purple: #9b59b6;
+            --border-glow: rgba(0, 180, 216, 0.4);
+            --code-bg: rgba(0, 0, 0, 0.3);
         }
 
         [data-theme="dark"] {
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --card-bg: rgba(30, 41, 59, 0.9);
+            --card-bg: rgba(30, 41, 59, 0.98);
             --accent-green: #15803d;
             --accent-blue: #38bdf8;
         }
@@ -35,25 +38,27 @@
             transition: 0.3s;
         }
 
-        /* BARRA LATERAL ESTILO APP MOVIL */
+        /* MENÚ LATERAL MEJORADO */
         aside {
-            width: 260px;
+            width: 280px;
             background-color: var(--app-dark);
             padding: 25px 15px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             position: fixed;
             height: 100vh;
             box-sizing: border-box;
             border-right: 2px solid var(--accent-blue);
-            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+            box-shadow: 5px 0 20px rgba(0,0,0,0.6);
+            z-index: 10;
         }
 
         .logo-area {
             text-align: center;
             border-bottom: 2px solid rgba(255,255,255,0.1);
             padding-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .logo-area h1 {
@@ -61,12 +66,13 @@
             margin: 0;
             color: var(--accent-blue);
             text-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+            font-family: 'Segoe UI Black', sans-serif;
         }
 
         .logo-area span {
             font-size: 0.85rem;
             color: var(--text-muted);
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .nav-menu {
@@ -76,28 +82,28 @@
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-glow);
             text-align: left;
             padding: 12px 20px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             color: var(--text-color);
             cursor: pointer;
-            border-radius: 30px; /* Estilo cápsula de app */
+            border-radius: 30px;
             transition: all 0.3s ease;
         }
 
         .nav-btn:hover {
             background-color: var(--accent-blue);
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
-            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
+            transform: translateX(8px);
         }
 
         .nav-btn.active {
             background-color: var(--accent-blue);
             border-color: #fff;
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
         }
 
         .theme-btn {
@@ -110,21 +116,20 @@
             border-radius: 30px;
             cursor: pointer;
             text-align: center;
-            transition: 0.3s;
         }
 
-        /* CONTENEDOR DE CONTENIDO PRINCIPAL */
+        /* ÁREA PRINCIPAL */
         main {
-            margin-left: 260px;
+            margin-left: 280px;
             flex: 1;
-            padding: 30px;
+            padding: 40px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* ZONA SUPERIOR: GALERÍA DE COMPONENTES COMPARTIDA */
+        /* VITRINA DE COMPONENTES */
         .hardware-gallery {
             display: flex;
             justify-content: center;
@@ -134,35 +139,36 @@
             margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.05);
             padding: 20px;
-            border-radius: 20px;
+            border-radius: 24px;
             border: 1px solid rgba(255,255,255,0.1);
             backdrop-filter: blur(5px);
             width: 100%;
-            max-width: 950px;
+            max-width: 1100px;
             box-sizing: border-box;
         }
 
         .hardware-gallery img {
-            height: 90px;
+            height: 80px;
             object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
-            transition: transform 0.3s;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+            transition: transform 0.3s ease;
         }
 
         .hardware-gallery img:hover {
-            transform: scale(1.15) rotate(3deg);
+            transform: scale(1.25) rotate(5deg);
         }
 
+        /* CONTENEDORES DE PESTAÑAS (CÁPSULAS DE LA APP) */
         .app-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-glow);
-            border-radius: 24px;
-            padding: 35px;
-            max-width: 950px;
+            border-radius: 28px;
+            padding: 40px;
+            max-width: 1100px;
             width: 100%;
             box-sizing: border-box;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
             display: none;
         }
 
@@ -170,65 +176,118 @@
             display: block;
         }
 
-        /* CUADRO VERDE GRANDE DE LA FOTO */
-        .banner-verde {
-            background-color: var(--accent-green);
+        .banner-app {
             color: white;
             font-size: 2.2rem;
             font-weight: bold;
             text-align: center;
             padding: 25px;
-            border-radius: 35px;
+            border-radius: 40px;
             border: 4px solid #ffffff;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            font-family: 'Segoe UI', Arial, sans-serif;
+            margin-bottom: 35px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .app-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 35px;
         }
 
-        @media (min-width: 900px) {
+        @media (min-width: 950px) {
             .app-grid {
-                grid-template-columns: 1.8fr 1.2fr;
+                grid-template-columns: 2.2fr 0.8fr;
             }
         }
 
-        /* ELEMENTOS INTERNOS DE LA APP */
+        /* SECCIONES INTERNAS CON MUCHA INFORMACIÓN */
         .topic-section {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.02);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
         }
 
         .topic-title {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--accent-blue);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
         }
 
         .topic-title span {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
         }
 
-        .topic-section p {
-            line-height: 1.6;
+        .sub-topic-title {
+            font-size: 1.2rem;
+            color: var(--accent-orange);
+            margin: 20px 0 10px 0;
+            font-weight: bold;
+        }
+
+        p, li {
+            line-height: 1.7;
             color: var(--text-muted);
-            margin: 0 0 10px 0;
             font-size: 1.05rem;
+            text-align: justify;
         }
 
-        /* FICHA TÉCNICA ESTILO APP */
+        ul, ol {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* TIMELINE DEL ENSAMBLAJE */
+        .assembly-step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            background: rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 6px solid var(--accent-orange);
+        }
+
+        .step-number {
+            background-color: var(--accent-orange);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+        }
+
+        /* CUADROS LATERALES */
+        .app-sidebar-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
         .app-table-box {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             border: 2px solid var(--border-glow);
-            border-radius: 18px;
+            border-radius: 22px;
             padding: 20px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
 
         .app-table-box h3 {
@@ -238,6 +297,7 @@
             font-size: 1.2rem;
             border-bottom: 1px solid rgba(255,255,255,0.2);
             padding-bottom: 8px;
+            text-transform: uppercase;
         }
 
         .app-table {
@@ -246,9 +306,10 @@
         }
 
         .app-table td {
-            padding: 12px 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             font-size: 0.95rem;
+            vertical-align: top;
         }
 
         .app-table tr:last-child td {
@@ -262,10 +323,10 @@
         }
 
         details {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 18px;
+            border-radius: 16px;
             margin-top: 15px;
             cursor: pointer;
         }
@@ -273,15 +334,25 @@
         summary {
             font-weight: bold;
             color: var(--accent-blue);
+            font-size: 1.1rem;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #e67e22;
+            font-family: 'Consolas', Monaco, monospace;
         }
 
         footer {
             margin-top: auto;
-            padding-top: 20px;
-            font-size: 0.85rem;
+            padding-top: 30px;
+            font-size: 0.9rem;
             color: rgba(255,255,255,0.4);
             text-align: center;
             width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
     </style>
 </head>
@@ -289,120 +360,278 @@
 
     <aside>
         <div class="logo-area">
-            <h1>Infotech App</h1>
-            <span>Aprende Rápido</span>
+            <h1>Informatica OS</h1>
+            <span>Enciclopedia Técnica</span>
         </div>
         
         <nav class="nav-menu">
             <button class="nav-btn active" onclick="switchTab('inicio')">🏠 Inicio</button>
-            <button class="nav-btn" onclick="switchTab('fundamentos')">📚 Fundamentos</button>
+            <button class="nav-btn" onclick="switchTab('hardware')">🖥️ Hardware Total</button>
+            <button class="nav-btn" onclick="switchTab('software')">💾 Software Integral</button>
+            <button class="nav-btn" onclick="switchTab('ensamblaje')">🔧 Taller de Ensamblaje</button>
         </nav>
         
-        <button class="theme-btn" onclick="toggleTheme()">🌓 Alternar Tema</button>
+        <button class="theme-btn" onclick="toggleTheme()">🌓 Cambiar Apariencia</button>
     </aside>
 
     <main>
         
         <div class="hardware-gallery">
-            <img src="https://img.icons8.com/isometric/512/computer-monitor.png" alt="Computadora">
+            <img src="https://img.icons8.com/isometric/512/computer-monitor.png" alt="Monitor">
             <img src="https://img.icons8.com/isometric/512/ram-card.png" alt="RAM">
             <img src="https://img.icons8.com/isometric/512/video-card.png" alt="GPU">
             <img src="https://img.icons8.com/isometric/512/cpu.png" alt="CPU">
+            <img src="https://img.icons8.com/isometric/512/motherboard.png" alt="Motherboard">
         </div>
 
         <section id="inicio" class="app-card active">
-            <div class="banner-verde">
-                Computadora: lo básico
+            <div class="banner-app" style="background-color: var(--accent-green);">
+                Computadora: Conceptos Base
             </div>
-            
             <div class="app-grid">
                 <div class="app-main-info">
                     <div class="topic-section">
-                        <div class="topic-title"><span>⚙️</span> El Vínculo Indisociable</div>
-                        <p>La informática une dos mundos totalmente dependientes: el <strong>Hardware</strong> (todo lo físico, cables, placas y chips que puedes tocar) y el <strong>Software</strong> (los programas, aplicaciones e instrucciones lógicas invisibles).</p>
-                        <p>Ninguno sirve sin el otro; el hardware es el cuerpo y el software es la mente que le dice qué hacer.</p>
+                        <div class="topic-title"><span>🔌</span> Introducción a los Sistemas Digitales</div>
+                        <p>Un sistema informático moderno es una simbiosis perfecta y absoluta entre dos dimensiones macroscópicas: el <strong>Hardware</strong> y el <strong>Software</strong>. El Hardware abarca todos los componentes de estado sólido, semiconductores de silicio, pistas de cobre conductoras, sistemas de alimentación regulada y periféricos electromecánicos que constituyen la anatomía visible y palpable de la máquina. El Software representa el tejido lógico abstracto compuesto por matrices de código binario, protocolos de red, algoritmos de asignación y programas de aplicación que instruyen e inyectan inteligencia al hardware.</p>
+                        <p>Históricamente, el hardware define las fronteras físicas y el límite de potencia computacional absoluta de un sistema, mientras que el software explota esos recursos a través de llamadas de sistema orientadas al hardware para interactuar de forma eficiente con el usuario y el ambiente.</p>
                     </div>
 
                     <div class="topic-section">
-                        <div class="topic-title"><span>🤖</span> El Rol de los Algoritmos</div>
-                        <p>Un algoritmo es una lista de pasos ordenados para resolver un problema. En la automatización (como en Arduino), los sensores recopilan datos del entorno, el algoritmo decide qué hacer y los actuadores ejecutan la acción de forma automática.</p>
+                        <div class="topic-title"><span>🤖</span> Algoritmia y Sistemas de Automatización</div>
+                        <p>Los algoritmos son el alma del software. Se definen formalmente como un conjunto finito, secuencial, determinista y no ambiguo de instrucciones lógicas diseñadas expresamente para recibir un estado inicial de datos (Input), procesarlos por medio de operaciones lógico-matemáticas elementales, y producir un estado final útil (Output).</p>
+                        <p>En el campo moderno del diseño industrial y la mecatrónica (como los entornos basados en placas Arduino o sistemas embebidos), los algoritmos se transforman en bucles infinitos de control. Los microcontroladores leen señales de voltaje procedentes de sensores analógicos o digitales (que miden variables físicas reales como humedad en suelos, temperatura, velocidad o luxes de luz ambiental), evalúan las condiciones programadas dentro del código mediante condicionales avanzados y envían de inmediato trenes de impulsos eléctricos a los actuadores o relés de potencia para alterar mecánicamente el entorno físico en tiempo real de manera autónoma.</p>
                     </div>
 
                     <details>
-                        <summary>💡 Ver curiosidad del primer "Bug"</summary>
-                        <p style="margin-top: 10px; color: var(--text-muted);">En 1947, una polilla real se quedó atrapada en los circuitos de la computadora Harvard Mark II, causando un fallo general. Los operarios removieron el insecto y lo pegaron en su bitácora llamándolo el primer "bug" (bicho) de la historia. ¡De ahí viene el término depurar o reparar código!</p>
+                        <summary>💡 Ver Glosario Histórico Avanzado: El Origen del Bug</summary>
+                        <p style="margin-top: 12px;">En los laboratorios de computación de la Universidad de Harvard, el 9 de septiembre de 1947, los ingenieros que operaban la titánica computadora electromecánica Harvard Mark II notaron fallos sistemáticos en un relé de conmutación. Al abrir físicamente los paneles protectores, la pionera de la programación Grace Murray Hopper descubrió una polilla real atrapada entre los contactos metálicos, impidiendo el flujo de la corriente eléctrica. El insecto fue extraído minuciosamente y adherido al diario de ingeniería del proyecto con la anotación textual: "First actual case of bug being found" (Primer caso real de bicho encontrado). A raíz de este evento fortuito, la industria adoptó de forma permanente e institucional los términos <em>bug</em> para referirse a un error lógico o físico en informática, y <em>debugging</em> (depuración) al proceso analítico de localización y erradicación de fallas en sistemas de software y hardware.</p>
                     </details>
                 </div>
-
+                
                 <div class="app-sidebar-info">
                     <div class="app-table-box">
-                        <h3>Resumen del Sistema</h3>
+                        <h3>Arquitectura</h3>
                         <table class="app-table">
-                            <tr>
-                                <td>Hardware:</td>
-                                <td>Parte Física Fuerte</td>
-                            </tr>
-                            <tr>
-                                <td>Software:</td>
-                                <td>Sistemas y Programas</td>
-                            </tr>
-                            <tr>
-                                <td>Lógica:</td>
-                                <td>Algoritmos de Control</td>
-                            </tr>
+                            <tr><td>Paradigma:</td><td>Von Neumann (1945).</td></tr>
+                            <tr><td>Base Física:</td><td>Hardware Estructural.</td></tr>
+                            <tr><td>Base Lógica:</td><td>Software de Control.</td></tr>
+                            <tr><td>Traducción:</td><td>Binario Puro y Lenguaje de Máquina.</td></tr>
                         </table>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="fundamentos" class="app-card">
-            <div class="banner-verde" style="background-color: #007791;">
-                Fundamentos del Sistema
+        <section id="hardware" class="app-card">
+            <div class="banner-app" style="background-color: var(--accent-blue);">
+                Hardware: Componentes, Chasis y Periféricos
             </div>
-            
             <div class="app-grid">
                 <div class="app-main-info">
+                    
                     <div class="topic-section">
-                        <div class="topic-title"><span>🧠</span> Arquitectura de Computadoras</div>
-                        <p>Basado en el modelo de <strong>Von Neumann</strong>, los equipos procesan todo con la <strong>CPU</strong> (Unidad Central de Procesamiento), guardan los datos inmediatos en la <strong>Memoria RAM</strong> (veloz pero volátil), y almacenan tus archivos para siempre en discos duros o <strong>SSD</strong>.</p>
+                        <div class="topic-title"><span>⚡</span> Componentes Principales Internos</div>
+                        <p>La infraestructura interna de hardware determina la capacidad de procesamiento de la información. Cada componente cumple un rol crítico e insustituible dentro de la placa base:</p>
+                        
+                        <div class="sub-topic-title">Unidad Central de Procesamiento (CPU)</div>
+                        <p>Conocido técnicamente como el microprocesador. Es un circuito integrado a gran escala constituido por miles de millones de transistores encapsulados en silicio. Su función es ejecutar el ciclo de instrucción (búsqueda, decodificación, ejecución y escritura) de todos los programas. Internamente se divide en la <strong>Unidad de Control (UC)</strong>, que gestiona el flujo de datos e instrucciones por todo el sistema, y la <strong>Unidad Aritmético Lógica (ALU)</strong>, que ejecuta los cálculos binarios puros de alta velocidad.</p>
+
+                        <div class="sub-topic-title">Memoria de Acceso Aleatorio (RAM)</div>
+                        <p>Es el almacenamiento primario de alta velocidad del sistema. Funciona bajo un principio de direccionamiento volátil, lo que significa que requiere corriente eléctrica constante para retener los datos cargados; al interrumpirse el suministro eléctrico, toda la información se disipa por completo. Su función principal es almacenar el mapa de instrucciones del sistema operativo y las aplicaciones abiertas para que la CPU acceda a ellas en nanosegundos.</p>
+
+                        <div class="sub-topic-title">Tarjeta Madre (Motherboard)</div>
+                        <p>Es la columna vertebral física del computador. Consiste en un circuito impreso multicapa (PCB) sobre el cual se interconectan absolutamente todos los componentes mediante los canales de comunicación denominados <em>buses</em>. Contiene el zócalo de la CPU, las ranuras de memoria RAM (DIMM), puertos PCIe para tarjetas de expansión y el circuito integrado de la BIOS/UEFI.</p>
+
+                        <div class="sub-topic-title">Unidades de Almacenamiento Masivo (SSD y HDD)</div>
+                        <p>Sistemas de memoria secundaria no volátil encargados de retener la información permanentemente. Los antiguos discos duros mecánicos (HDD) graban datos mediante campos magnéticos en platos giratorios de aluminio. Las modernas unidades de estado sólido (SSD) emplean memorias flash de compuertas flotantes (NAND Flash) sin piezas móviles, ofreciendo tasas de lectura y escritura hasta diez veces superiores.</p>
+
+                        <div class="sub-topic-title">Unidad de Procesamiento Gráfico (GPU / Tarjeta de Video)</div>
+                        <p>Coprocesador especializado en el renderizado y procesamiento masivo de datos visuales en paralelo. A diferencia de la CPU, posee miles de núcleos de procesamiento pequeños diseñados para calcular gráficos complejos en tiempo real.</p>
                     </div>
 
                     <div class="topic-section">
-                        <div class="topic-title"><span>🎛️</span> El Sistema Operativo (S.O.)</div>
-                        <p>Es el software maestro de la computadora. Controla los procesos, decide qué programa usa el procesador, reparte la memoria RAM y permite que los drivers entiendan los periféricos conectados al equipo.</p>
+                        <div class="topic-title"><span>📐</span> El Chasis y los Factores de Forma</div>
+                        <p>El chasis, carcasa o gabinete es la estructura metálica y plástica encargada de brindar soporte mecánico, aislamiento térmico frente al exterior, y defensa crítica contra descargas electromagnéticas (EMI) a todos los componentes internos.</p>
+                        <p>El estándar que rige las dimensiones físicas exactas, la distribución de los tornillos de anclaje de la tarjeta madre y las dimensiones de la fuente de poder se denomina <strong>Factor de Forma</strong>. Los chasis se clasifican estrictamente en:</p>
+                        <ul>
+                            <li><strong>ATX (Advanced Technology Extended):</strong> Es el estándar de tamaño completo más extendido en la industria. Permite tarjetas madre de hasta 305 × 244 mm, garantizando espacio para sistemas de refrigeración líquida masivos, múltiples tarjetas gráficas de gran tamaño y hasta 7 ranuras de expansión PCIe. Ofrece el mejor flujo de aire técnico.</li>
+                            <li><strong>Micro-ATX:</strong> Formato compacto intermedio con dimensiones máximas de 244 × 244 mm. Reduce el número de ranuras de expansión a 4, pero conserva compatibilidad completa con fuentes de poder estándar y componentes de alto rendimiento, siendo ideal para estaciones de trabajo compactas de oficina o gaming de gama media.</li>
+                            <li><strong>Mini-ITX:</strong> El formato ultra compacto estandarizado con medidas rígidas de 170 × 170 mm. Reduce al extremo el espacio físico, disponiendo habitualmente de solo dos ranuras para memoria RAM y una única ranura PCIe. Requiere una gestión de cableado milimétrica y chasis de diseño especializado para evitar problemas críticos de estrangulamiento térmico.</li>
+                        </ul>
                     </div>
 
                     <div class="topic-section">
-                        <div class="topic-title"><span>🔢</span> El Universo Binario</div>
-                        <p>Por dentro, los componentes solo entienden impulsos eléctricos: encendido o apagado. Esto se traduce en **Bits** (ceros <code>0</code> y unos <code>1</code>). La agrupación de 8 bits crea un **Byte**, que equivale a una letra o un carácter del teclado.</p>
+                        <div class="topic-title"><span>🔌</span> Clasificación Avanzada de Periféricos</div>
+                        <p>Los periféricos son todos los dispositivos externos de hardware encargados de realizar la interfaz entre el núcleo de procesamiento interno del computador y los estímulos sensoriales o mecánicos del entorno humano:</p>
+                        <ul>
+                            <li><strong>Periféricos de Entrada (Input):</strong> Dispositivos que capturan información analógica del exterior, la digitalizan y la inyectan a los buses del sistema. Incluye teclados de matriz mecánica, ratones con sensores ópticos de alta precisión, micrófonos de condensador, escáneres y sensores electrónicos industriales (como sensores de humedad, temperatura, proximidad infrarroja u ópticos usados en automatización).</li>
+                            <li><strong>Periféricos de Salida (Output):</strong> Dispositivos que reciben los flujos de bits procesados por la CPU y los transforman en señales físicas perceptibles o acciones mecánicas. Incluye monitores con paneles de cristal líquido (LCD/OLED) que proyectan luz visible, impresoras térmicas o de inyección, auriculares, altavoces y actuadores electrónicos de potencia (motores de pasos, bombas hidráulicas o relés electromagnéticos).</li>
+                            <li><strong>Periféricos Mixtos o de Almacenamiento/Comunicación:</strong> Dispositivos capaces de operar bidireccionalmente, enviando y recibiendo datos de forma simultánea. Incluye tarjetas de interfaz de red (Ethernet/Wi-Fi), módems, pantallas táctiles de tecnología capacitiva y unidades de almacenamiento flash portátiles (Pendrives, discos duros externos).</li>
+                        </ul>
                     </div>
+
                 </div>
 
                 <div class="app-sidebar-info">
                     <div class="app-table-box">
-                        <h3>Ficha Técnica: Computación</h3>
+                        <h3>Métricas de Chasis</h3>
                         <table class="app-table">
-                            <tr>
-                                <td>CPU</td>
-                                <td>Procesamiento completo de datos lógicos.</td>
-                            </tr>
-                            <tr>
-                                <td>Memoria RAM</td>
-                                <td>Almacenamiento volátil y ultrarrápido.</td>
-                            </tr>
-                            <tr>
-                                <td>Periféricos</td>
-                                <td>Dispositivos de Entrada/Salida de datos.</td>
-                            </tr>
-                            <tr>
-                                <td>Sistema Operativo</td>
-                                <td>Software base controlador del hardware.</td>
-                            </tr>
-                            <tr>
-                                <td>Automatización</td>
-                                <td>Acciones autónomas mediante sistemas físicos.</td>
-                            </tr>
+                            <tr><td>ATX</td><td>305 × 244 mm</td></tr>
+                            <tr><td>Micro-ATX</td><td>244 × 244 mm</td></tr>
+                            <tr><td>Mini-ITX</td><td>170 × 170 mm</td></tr>
+                            <tr><td>Buses</td><td>Datos, Dirección y Control</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="software" class="app-card">
+            <div class="banner-app" style="background-color: var(--accent-purple);">
+                Software: Tipos, Sistemas Operativos y Ofimática
+            </div>
+            <div class="app-grid">
+                <div class="app-main-info">
+                    
+                    <div class="topic-section">
+                        <div class="topic-title"><span>💾</span> Taxonomía del Software</div>
+                        <p>El software se clasifica formalmente en tres grandes categorías jerárquicas en función de su nivel de abstracción respecto al silicio del hardware y su propósito operativo dentro del ecosistema informático:</p>
+                        <ol>
+                            <li><strong>Software de Sistema:</strong> Es la capa de código fundamental encargada de aislar al programador y al usuario final de la complejidad de los circuitos eléctricos del computador. Su función primordial es coordinar, inicializar y gestionar de forma directa el hardware de la máquina. El componente más crítico de este grupo es el **Sistema Operativo**, secundado por los controladores de dispositivos (drivers), cargadores de arranque, utilidades de diagnóstico del sistema y el firmware (como la BIOS o UEFI).</li>
+                            <li><strong>Software de Programación:</strong> Conjunto de herramientas digitales diseñadas específicamente para permitir a los desarrolladores escribir, depurar, compilar, interpretar y mantener otros programas informáticos mediante el uso de lenguajes de alto, medio o bajo nivel. Incluye Editores de texto especializados, Compiladores (que traducen código fuente a código máquina binario), Intérpretes, Depuradores (Debuggers) y Entornos de Desarrollo Integrados (IDE), como Visual Studio Code o la IDE de Arduino.</li>
+                            <li><strong>Software de Aplicación:</strong> Programas diseñados con el único propósito de automatizar, facilitar o potenciar la realización de tareas específicas e individuales para el usuario final. Abarca software de diseño gráfico profesional, navegadores web, bases de datos complejas, videojuegos de simulación y herramientas de productividad.</li>
+                        </ol>
+                    </div>
+
+                    <div class="topic-section">
+                        <div class="topic-title"><span>🎛️</span> Sistemas Operativos y Gestión de Recursos</div>
+                        <p>El <strong>Sistema Operativo (S.O.)</strong> es el software maestro que toma el control absoluto de la computadora desde el momento del arranque (POST). Su arquitectura interna se basa en un núcleo central o <strong>Kernel</strong> que interactúa directamente con el hardware a través de abstracciones lógicas conocidas como llamadas de sistema (System Calls).</p>
+                        <p>Los sistemas operativos modernos implementan cuatro pilares de gestión obligatorios:</p>
+                        <ul>
+                            <li><strong>Gestión de Procesos:</strong> Administra el tiempo de CPU mediante algoritmos de planificación avanzados (Scheduling). Permite la multitarea real o simulada asignando ráfagas de tiempo del procesador a los diferentes hilos de ejecución de los programas abiertos.</li>
+                            <li><strong>Gestión de Memoria RAM:</strong> Supervisa qué zonas de la memoria están en uso por cada proceso. Implementa técnicas de memoria virtual para paginar datos hacia el almacenamiento secundario cuando la RAM física se satura, garantizando que el sistema operativo nunca colapse por falta de espacio.</li>
+                            <li><strong>Sistema de Archivos (File System):</strong> Define la estructura lógica para organizar, nombrar, leer y almacenar los datos binarios en unidades de almacenamiento secundario de forma jerárquica y segura. Estándares comunes incluyen NTFS (Windows), ext4 (Linux) y APFS (macOS).</li>
+                            <li><strong>Seguridad y Permisos:</strong> Establece barreras críticas para evitar que procesos no autorizados corrompan el espacio de memoria de otros programas o realicen llamadas destructivas al hardware básico.</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-section">
+                        <div class="topic-title"><span>📊</span> Suites Ofimáticas y Productividad</div>
+                        <p>Dentro del software de aplicación orientada a la productividad corporativa y estudiantil, las **Suites Ofimáticas** representan el estándar mundial de gestión documental. El paquete de referencia en la industria es **Microsoft Office / Microsoft 365**, constituido por herramientas con propósitos bien diferenciados:</p>
+                        <ul>
+                            <li><strong>Microsoft Word (Procesador de Textos):</strong> Software avanzado enfocado en la creación, maquetación, edición y diseño de documentos de texto estructurados. Permite el control milimétrico de tipografías, tablas de contenido automáticas, referencias bibliográficas bajo estándares internacionales y herramientas de revisión gramatical en tiempo real.</li>
+                            <li><strong>Microsoft Excel (Hoja de Cálculo):</strong> Potente motor matemático y estadístico basado en una matriz bidimensional de celdas organizadas por filas y columnas. Su fuerza radica en la ejecución automática de fórmulas lógicas complejos, funciones de búsqueda indexada, tablas dinámicas y herramientas de modelado de datos gráficos esenciales para la ingeniería y las finanzas.</li>
+                            <li><strong>Microsoft PowerPoint (Gestor de Presentaciones):</strong> Aplicación especializada en el diseño y despliegue de material visual interactivo estructurado mediante diapositivas secuenciales. Integra sistemas de animaciones basadas en líneas de tiempo, transiciones cinemáticas y soporte multimedia avanzado para optimizar la exposición de proyectos e ideas de alto impacto.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="app-sidebar-info">
+                    <div class="app-table-box">
+                        <h3>Capas de Software</h3>
+                        <table class="app-table">
+                            <tr><td>Capa Superior:</td><td>Aplicación (User)</td></tr>
+                            <tr><td>Capa Media:</td><td>Sistemas Operativos</td></tr>
+                            <tr><td>Capa Baja:</td><td>Drivers y Firmware</td></tr>
+                            <tr><td>Base:</td><td>Hardware de Silicio</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ensamblaje" class="app-card">
+            <div class="banner-app" style="background-color: var(--accent-orange);">
+                Taller de Ensamblaje Técnico Paso a Paso
+            </div>
+            <div class="app-grid">
+                <div class="app-main-info">
+                    
+                    <div class="topic-section" style="border-left: 6px solid #e74c3c;">
+                        <div class="topic-title" style="color: #e74c3c;"><span>⚠️</span> Protocolo de Seguridad Antiestática Obligatorio</div>
+                        <p>El cuerpo humano actúa naturalmente como un condensador biológico capaz de acumular cargas de electricidad estática de hasta 15,000 voltios debido a la fricción con la ropa o el calzado. Los componentes electrónicos internos de una computadora (especialmente los transistores de la CPU y los chips de la memoria RAM) operan con voltajes ínfimos que rondan los 1.2 voltios. Una descarga electrostática accidental (ESD) transferida a través de las yemas de los dedos puede fundir microscópicamente las pistas internas de silicio de un componente, inutilizándolo al instante.</p>
+                        <p><strong>Normas críticas antes de empezar:</strong> Es de carácter estrictamente obligatorio utilizar una pulsera antiestática conectada a la toma de tierra del laboratorio o, en su defecto, tocar de forma constante la chapa metálica desnuda de una estructura conectada a tierra para ecualizar el potencial eléctrico del cuerpo. Queda rotundamente prohibido trabajar sobre alfombras o usar ropa de lana durante el ensamblaje técnico.</p>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Preparación de la Placa Base e Instalación de la CPU:</strong>
+                            <p>Retira la tarjeta madre de su empaque antiestático y colócala de forma horizontal sobre una superficie aislante y limpia (nunca sobre bolsas conductoras). Ubica el zócalo o socket de la CPU. Acciona la palanca metálica de retención lateral para abrir la placa de sujeción superior.</p>
+                            <p>Sujeta el microprocesador exclusivamente por sus bordes laterales de resina. Localiza de forma visual el indicador triangular dorado situado en una de las esquinas de la CPU y alínealo perfectamente con la muesca triangular grabada en la esquina del zócalo de la tarjeta madre. Deposita la CPU verticalmente en el zócalo sin aplicar fuerza mecánica alguna; el procesador debe calzar por gravedad propia.</p>
+                            <p>Baja la placa de sujeción metálica y presiona firmemente la palanca de retención hasta encajarla debajo del gancho de seguridad. Al hacer esto, la cubierta protectora plástica del zócalo saltará de forma automática; retírala y consérvala.</p>
+                        </div>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Inserción de los Módulos de Memoria RAM:</strong>
+                            <p>Identifica las ranuras DIMM de memoria RAM en la placa madre. Si planeas instalar dos módulos para activar la tecnología de doble canal (Dual Channel) para duplicar el ancho de banda de comunicación de la memoria, consulta el manual de la tarjeta madre para identificar los canales prioritarios (habitualmente las ranuras alternadas A2 y B2).</p>
+                            <p>Abre los clips plásticos de seguridad situados en los extremos de la ranura seleccionada. Toma el módulo de memoria RAM por sus bordes y localiza la muesca física asimétrica ubicada en la zona central de los contactos dorados. Alinea la muesca con la guía física interna de la ranura.</p>
+                            <p>Presiona verticalmente y de forma homogénea ambos extremos del módulo de memoria RAM hacia abajo con firmeza. El proceso concluirá de manera exitosa en el instante en que escuches un sonido de "clic" seco proveniente de los clips plásticos laterales al cerrarse automáticamente sobre las muescas del módulo.</p>
+                        </div>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Montaje de la Pasta Térmica y el Sistema de Refrigeración:</strong>
+                            <p>La superficie metálica superior de la CPU (IHS) y la base de contacto del disipador de calor presentan imperfecciones microscópicas microscópicas de aire que actúan como aislantes térmicos. La función de la pasta térmica es rellenar dichos poros con un compuesto de alta conductividad para transferir eficazmente el calor.</p>
+                            <p>Aplica una pequeña dosis de pasta térmica (con un volumen equivalente al tamaño de un grano de guisante o un grano de arroz grueso) exactamente en el centro geométrico del IHS de la CPU. No es necesario esparcirla manualmente; la presión mecánica del disipador la distribuirá de forma homogénea.</p>
+                            <p>Coloca el cuerpo del disipador o el bloque de refrigeración líquida sobre la CPU. Atornilla los cuatro puntos de anclaje a la placa base siguiendo un patrón estricto en cruz (X), dando un par de vueltas a cada tornillo de forma alternada para distribuir la tensión mecánica de manera uniforme sobre el microprocesador. Conecta el cable eléctrico del ventilador al puerto marcado específicamente como <code>CPU_FAN</code> en la tarjeta madre.</p>
+                        </div>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Instalación de la Fuente de Poder y Preparación del Chasis:</strong>
+                            <p>Abre los paneles laterales del chasis. Introduce la fuente de alimentación (PSU) en la bahía inferior dedicada. Asegúrate de orientar el ventilador extractor de la fuente hacia las rejillas de ventilación externas del chasis para garantizar un suministro constante de aire fresco aislado del interior. Fija la fuente de poder atornillándola firmemente desde la parte posterior exterior del gabinete empleando cuatro tornillos hexagonales de rosca gruesa.</p>
+                            <p>Instala el escudo protector metálico de puertos traseros (I/O Shield) a presión en la ventana posterior del chasis (en tarjetas madre modernas, este escudo ya viene preinstalado de fábrica). Verifica que los separadores de latón roscados internos del gabinete coincidan milimétricamente con los agujeros de fijación de tu placa base según su factor de forma (ATX o Micro-ATX).</p>
+                        </div>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Fijación de la Tarjeta Madre y Cableado de Alimentación:</strong>
+                            <p>Introduce con cuidado la tarjeta madre dentro del chasis en un ángulo inclinado, haciendo coincidir los conectores traseros con las aperturas del I/O Shield. Descansa la placa base sobre los separadores de latón instalados en el paso previo.</p>
+                            <p>Atornilla la tarjeta madre a los separadores utilizando tornillos de rosca fina. Realiza el proceso de fijación de manera progresiva, sin apretar excesivamente los tornillos para evitar fisuras o tensiones mecánicas dañinas en el circuito impreso multicapa.</p>
+                            <p>Comienza la conexión de los cables de energía procedentes de la fuente: canaliza el cable de alimentación principal de **24 pines ATX** al conector lateral derecho de la placa, y conecta el cable de potencia **EPS de 4+4 pines** dedicado exclusivamente al suministro eléctrico de la CPU en la zona superior izquierda de la tarjeta madre.</p>
+                        </div>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">6</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Conexión del Panel Frontal del Chasis y Almacenamiento Secundario:</strong>
+                            <p>Identifica los cables delgados procedentes del panel frontal del gabinete. Conéctalos minuciosamente en la matriz de pines marcada como <code>JFP1</code> o <code>PANEL</code> en la sección inferior de la tarjeta madre, prestando estricta atención a la polaridad positiva y negativa indicada en el manual para habilitar el botón de encendido (Power SW), botón de reinicio (Reset SW) y los diodos led indicadores de actividad (HDD LED y Power LED). Conecta los cables correspondientes a los puertos USB frontales y la salida de audio.</p>
+                            <p>Si empleas unidades de almacenamiento secundario **SSD tipo M.2 NVMe**, retira el tornillo de fijación de la ranura dedicada en la placa base, introduce la pequeña tarjeta M.2 en un ángulo de 30 grados hasta el fondo del conector, presiona la unidad hacia abajo para dejarla horizontal y atorníllala suavemente. Si usas discos mecánicos o SSD clásicos de 2.5 pulgadas, fíjalos en las bahías del gabinete y conéctalos mediante el cable de datos **SATA** a la placa y el conector de energía SATA directo de la fuente.</p>
+                        </div>
+                    </div>
+
+                    <div class="assembly-step">
+                        <div class="step-number">7</div>
+                        <div>
+                            <strong style="color: var(--accent-orange); font-size: 1.15rem;">Instalación de la Tarjeta Gráfica Dedicada (GPU) y Cierre General:</strong>
+                            <p>Identifica la ranura de expansión principal **PCI Express x16** (habitualmente blindada en metal y ubicada en la zona superior de las ranuras de expansión). Retira las cubiertas metálicas protectoras posteriores del chasis que obstruyan la salida de los puertos de video de la tarjeta gráfica.</p>
+                            <p>Abre el clip de seguridad plástico situado al extremo de la ranura PCIe. Alinea los contactos dorados de la tarjeta gráfica con la ranura e introdúcela verticalmente con una presión firme y homogénea hasta que el clip plástico de seguridad retorne a su posición inicial y se escuche un "clic" de confirmación. Atornilla el soporte metálico de la tarjeta al chasis.</p>
+                            <p>Conecta los cables de alimentación suplementarios **PCIe de 6+2 pines** desde la fuente de poder hacia los conectores superiores de la GPU. Realiza una última inspección visual detallada para asegurar que ningún cable obstruya los ventiladores del sistema, asegura las tapas laterales del gabinete y conecta el equipo a la red eléctrica para proceder al primer encendido de prueba técnico.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="app-sidebar-info">
+                    <div class="app-table-box">
+                        <h3>Herramientas</h3>
+                        <table class="app-table">
+                            <tr><td>Destornillador:</td><td>Estrella/Phillips PH2</td></tr>
+                            <tr><td>Aislamiento:</td><td>Pulsera ESD</td></tr>
+                            <tr><td>Fijadores:</td><td>Tornillos M3 y 6-32</td></tr>
+                            <tr><td>Compuesto:</td><td>Pasta Térmica</td></tr>
                         </table>
                     </div>
                 </div>
@@ -410,12 +639,11 @@
         </section>
 
         <footer>
-            <p>App de Aprendizaje Digital 2026 • Diseñado por Jehasa</p>
+            <p>Ecosistema de Enciclopedias Digitales Académicas 2026 • Desarrollado por Jehasa</p>
         </footer>
     </main>
 
     <script>
-        // Función para cambiar de pestañas estilo App Móvil
         function switchTab(tabId) {
             const cards = document.querySelectorAll('.app-card');
             cards.forEach(card => card.classList.remove('active'));
@@ -425,9 +653,11 @@
 
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
+            
+            // Auto scroll hacia arriba al cambiar de sección densa
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Sistema de cambio de temas visuales
         function toggleTheme() {
             const body = document.body;
             if (body.getAttribute('data-theme') === 'dark') {
