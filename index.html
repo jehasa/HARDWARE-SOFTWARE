@@ -3,271 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infotech Wiki - Enciclopedia de Hardware, Software y Fundamentos</title>
+    <title>Computación: Lo Básico - App de Aprendizaje</title>
     <style>
         :root {
-            --bg-color: #f6f8fa;
-            --wiki-white: #ffffff;
-            --text-color: #202122;
-            --text-muted: #54595d;
-            --primary-blue: #364d7c;
-            --accent-cyan: #007791;
-            --border-color: #a2a9b1;
-            --sidebar-bg: #f8f9fa;
-            --card-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            --highlight-bg: #eaf3ff;
+            --bg-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --app-dark: #0b192c;
+            --card-bg: rgba(15, 32, 67, 0.85);
+            --text-color: #ffffff;
+            --text-muted: #cbd5e1;
+            --accent-green: #00875a;
+            --accent-blue: #00b4d8;
+            --border-glow: rgba(0, 180, 216, 0.3);
         }
 
         [data-theme="dark"] {
-            --bg-color: #121212;
-            --wiki-white: #1e1e1e;
-            --text-color: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --primary-blue: #3d70b2;
-            --accent-cyan: #00b4d8;
-            --border-color: #444444;
-            --sidebar-bg: #1a1a1a;
-            --card-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            --highlight-bg: #1c2d42;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --card-bg: rgba(30, 41, 59, 0.9);
+            --accent-green: #15803d;
+            --accent-blue: #38bdf8;
         }
 
         body {
-            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-color);
             margin: 0;
             padding: 0;
             display: flex;
             min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
+            transition: 0.3s;
         }
 
-        /* BARRA LATERAL ESTILO WIKIPEDIA */
+        /* BARRA LATERAL ESTILO APP MOVIL */
         aside {
-            width: 240px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            padding: 20px;
+            width: 260px;
+            background-color: var(--app-dark);
+            padding: 25px 15px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             position: fixed;
             height: 100vh;
             box-sizing: border-box;
+            border-right: 2px solid var(--accent-blue);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+        }
+
+        .logo-area {
+            text-align: center;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
         }
 
         .logo-area h1 {
-            font-size: 1.4rem;
-            color: var(--primary-blue);
+            font-size: 1.6rem;
             margin: 0;
-            font-family: Georgia, serif;
-            letter-spacing: 0.5px;
+            color: var(--accent-blue);
+            text-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
         }
 
         .logo-area span {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-menu {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
         }
 
         .nav-btn {
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glow);
             text-align: left;
-            padding: 10px 15px;
-            font-size: 0.95rem;
-            font-weight: 600;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
             color: var(--text-color);
             cursor: pointer;
-            border-radius: 4px;
-            border-left: 4px solid transparent;
-            transition: 0.2s;
+            border-radius: 30px; /* Estilo cápsula de app */
+            transition: all 0.3s ease;
         }
 
         .nav-btn:hover {
-            background-color: var(--bg-color);
-            color: var(--accent-cyan);
+            background-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
+            transform: translateX(5px);
         }
 
         .nav-btn.active {
-            background-color: var(--highlight-bg);
-            color: var(--primary-blue);
-            border-left-color: var(--primary-blue);
+            background-color: var(--accent-blue);
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
         }
 
         .theme-btn {
             margin-top: auto;
-            background-color: var(--primary-blue);
+            background: linear-gradient(90deg, #3a3b3c, #1a1a1a);
             color: white;
-            border: none;
-            padding: 10px;
+            border: 1px solid #555;
+            padding: 12px;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: 0.2s;
+            text-align: center;
+            transition: 0.3s;
         }
 
-        .theme-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* CONTENEDOR PRINCIPAL */
+        /* CONTENEDOR DE CONTENIDO PRINCIPAL */
         main {
-            margin-left: 240px;
+            margin-left: 260px;
             flex: 1;
-            padding: 40px;
+            padding: 30px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ZONA SUPERIOR: GALERÍA DE COMPONENTES COMPARTIDA */
+        .hardware-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            width: 100%;
+            max-width: 950px;
             box-sizing: border-box;
         }
 
-        .wiki-page {
-            background-color: var(--wiki-white);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 30px;
-            box-shadow: var(--card-shadow);
+        .hardware-gallery img {
+            height: 90px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+            transition: transform 0.3s;
         }
 
-        .tab-content {
+        .hardware-gallery img:hover {
+            transform: scale(1.15) rotate(3deg);
+        }
+
+        .app-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 35px;
+            max-width: 950px;
+            width: 100%;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: none;
         }
 
-        .tab-content.active {
+        .app-card.active {
             display: block;
         }
 
-        h2 {
-            font-family: Georgia, serif;
-            font-size: 2rem;
-            margin-top: 0;
-            color: var(--primary-blue);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
+        /* CUADRO VERDE GRANDE DE LA FOTO */
+        .banner-verde {
+            background-color: var(--accent-green);
+            color: white;
+            font-size: 2.2rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 25px;
+            border-radius: 35px;
+            border: 4px solid #ffffff;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        h3 {
-            font-size: 1.3rem;
-            color: var(--accent-cyan);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
-            margin-top: 25px;
-        }
-
-        p, li {
-            line-height: 1.6;
-            font-size: 1.05rem;
-        }
-
-        /* DISEÑO DE COLUMNAS PARA FUNDAMENTOS */
-        .wiki-grid {
+        .app-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 30px;
         }
 
         @media (min-width: 900px) {
-            .wiki-grid {
-                grid-template-columns: 2.5fr 1fr;
+            .app-grid {
+                grid-template-columns: 1.8fr 1.2fr;
             }
         }
 
-        /* FICHA TÉCNICA (INFOBOX) */
-        .infobox {
-            background-color: var(--sidebar-bg);
-            border: 1px solid var(--border-color);
-            border-top: 5px solid var(--primary-blue);
-            border-radius: 4px;
-            padding: 15px;
-            height: fit-content;
-            font-size: 0.9rem;
+        /* ELEMENTOS INTERNOS DE LA APP */
+        .topic-section {
+            margin-bottom: 25px;
         }
 
-        .infobox h4 {
+        .topic-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .topic-title span {
+            font-size: 1.7rem;
+        }
+
+        .topic-section p {
+            line-height: 1.6;
+            color: var(--text-muted);
             margin: 0 0 10px 0;
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--primary-blue);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
+            font-size: 1.05rem;
         }
 
-        .infobox-table {
+        /* FICHA TÉCNICA ESTILO APP */
+        .app-table-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--border-glow);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .app-table-box h3 {
+            margin: 0 0 15px 0;
+            text-align: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 8px;
+        }
+
+        .app-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .infobox-table td {
-            padding: 8px 4px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: top;
+        .app-table td {
+            padding: 12px 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
         }
 
-        .infobox-table td:first-child {
+        .app-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .app-table td:first-child {
             font-weight: bold;
-            color: var(--accent-cyan);
-            width: 45%;
-        }
-
-        /* BLOQUES DE ALERTA O DESTACADOS */
-        .highlight-box {
-            background-color: var(--highlight-bg);
-            border-left: 5px solid var(--accent-cyan);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
+            color: var(--accent-blue);
+            width: 40%;
         }
 
         details {
-            background-color: var(--sidebar-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 12px;
             margin-top: 15px;
             cursor: pointer;
         }
 
         summary {
             font-weight: bold;
-            color: var(--primary-blue);
-            font-size: 1.1rem;
+            color: var(--accent-blue);
         }
 
         footer {
-            margin-top: 40px;
-            text-align: center;
+            margin-top: auto;
+            padding-top: 20px;
             font-size: 0.85rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            width: 100%;
         }
     </style>
-    
-    <!-- Metadato de Google para el motor de búsqueda indexado -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://jehasa.github.io/HARDWARE-SOFTWARE/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.google.com/search?q=site:jehasa.github.io/HARDWARE-SOFTWARE/+{search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
 </head>
 <body>
 
-    <!-- MENÚ LATERAL ESTILO WIKIPEDIA -->
     <aside>
         <div class="logo-area">
-            <h1>Infotech Wiki</h1>
-            <span>Enciclopedia Libre</span>
+            <h1>Infotech App</h1>
+            <span>Aprende Rápido</span>
         </div>
         
         <nav class="nav-menu">
@@ -275,129 +298,136 @@
             <button class="nav-btn" onclick="switchTab('fundamentos')">📚 Fundamentos</button>
         </nav>
         
-        <button class="theme-btn" onclick="toggleTheme()">🌓 Cambiar Modo</button>
+        <button class="theme-btn" onclick="toggleTheme()">🌓 Alternar Tema</button>
     </aside>
 
-    <!-- CUERPO DE LA PÁGINA -->
     <main>
-        <div class="wiki-page">
+        
+        <div class="hardware-gallery">
+            <img src="https://img.icons8.com/isometric/512/computer-monitor.png" alt="Computadora">
+            <img src="https://img.icons8.com/isometric/512/ram-card.png" alt="RAM">
+            <img src="https://img.icons8.com/isometric/512/video-card.png" alt="GPU">
+            <img src="https://img.icons8.com/isometric/512/cpu.png" alt="CPU">
+        </div>
+
+        <section id="inicio" class="app-card active">
+            <div class="banner-verde">
+                Computadora: lo básico
+            </div>
             
-            <!-- SECCIÓN 1: INICIO (Hardware vs Software) -->
-            <section id="inicio" class="tab-content active">
-                <h2>Hardware y Software</h2>
-                <p>En el ámbito de la informática, los sistemas de computación se dividen en dos pilares fundamentales e interdependientes: el <strong>Hardware</strong> (la infraestructura física) y el <strong>Software</strong> (el conjunto de componentes lógicos o programas).</p>
-                
-                <div class="highlight-box">
-                    <strong>Definición rápida:</strong> El hardware es todo aquello que puedes golpear físicamente; el software es la parte a la que solo le puedes gritar cuando falla.
-                </div>
-
-                <h3>El Vínculo Indisociable</h3>
-                <p>Ninguno de los dos puede funcionar de forma aislada. El hardware requiere de instrucciones precisas del software para saber cómo operar los voltajes eléctricos, mientras que el software necesita una plataforma física real donde almacenar sus bits y ejecutar sus procesos lógicos.</p>
-
-                <details>
-                    <summary>💡 Curiosidad Histórica: El origen del "Bug"</summary>
-                    <p style="margin-top: 10px;">¿Sabías que el primer error informático documentado fue causado por un insecto real? En septiembre de 1947, la científica Grace Hopper encontró una polilla atrapada en los relés de la gigantesca computadora Harvard Mark II. Al removerla del circuito, pegó el insecto en su bitácora con la nota "Primer caso real de bug encontrado". Desde entonces, resolver problemas de código se llama <em>debugging</em> (depuración).</p>
-                </details>
-
-                <details>
-                    <summary>🤖 El Rol de los Algoritmos en la Automatización</summary>
-                    <p style="margin-top: 10px;">Un algoritmo es una secuencia lógica, finita y bien definida de pasos mecánicos diseñados para solucionar un problema. En los modernos sistemas de automatización, los sensores leen datos físicos del mundo real (humedad, temperatura, proximidad), el software ejecuta un algoritmo condicional y, finalmente, envía señales de potencia a los actuadores (motores, bombas de agua, pantallas) para interactuar autónomamente con el entorno.</p>
-                </details>
-            </section>
-
-            <!-- SECCIÓN 2: FUNDAMENTOS (Mucha información detallada) -->
-            <section id="fundamentos" class="tab-content">
-                <div class="wiki-grid">
-                    
-                    <!-- Columna de Artículos -->
-                    <div class="wiki-main">
-                        <h2>Fundamentos de las Ciencias de la Computación</h2>
-                        <p>Los <strong>fundamentos informáticos</strong> constituyen los pilares teóricos y prácticos que rigen la arquitectura computacional moderna, el modelado de datos y los sistemas operativos encargados de orquestar la tecnología del siglo XXI.</p>
-                        
-                        <h3>1. Arquitectura de Computadoras (Von Neumann)</h3>
-                        <p>Casi la totalidad de los dispositivos informáticos comerciales se estructuran bajo el modelo clásico de la <strong>Arquitectura de Von Neumann</strong> de 1945. Esta describe una computadora digital con cuatro subsistemas clave conectados mediante canales de comunicación compartidos conocidos como <em>buses</em>:</p>
-                        <ul>
-                            <li><strong>Unidad Central de Procesamiento (CPU):</strong> Considerada el núcleo operativo o "cerebro". Alberga la Unidad de Control (UC) encargada de decodificar instrucciones, y la Unidad Aritmético Lógica (ALU) que procesa las operaciones matemáticas y booleanas.</li>
-                            <li><strong>Memoria RAM:</strong> Almacenamiento primario volátil. Retiene a velocidades extremas los datos de los procesos en ejecución activa. Pierde toda su información al cesar el suministro eléctrico.</li>
-                            <li><strong>Memoria Secundaria:</strong> Unidades de almacenamiento masivo y permanente, como los discos de estado sólido (SSD) o discos mecánicos (HDD). Guardan la información de manera persistente.</li>
-                            <li><strong>Buses del Sistema:</strong> Líneas eléctricas de comunicación que transportan direcciones físicas de memoria, bloques de datos puros y señales de sincronismo/control.</li>
-                        </ul>
-
-                        <h3>2. El Sistema Operativo como Gestor de Recursos</h3>
-                        <p>El <strong>Sistema Operativo (S.O.)</strong> es la capa de software de bajo nivel más importante de una máquina. Su propósito primordial es administrar de manera eficiente, equitativa y segura el hardware, proveyendo a su vez una interfaz de abstracción para el usuario y los programas de aplicación.</p>
-                        <p>Entre sus misiones principales destacan la planificación multitarea de la CPU, el aislamiento seguro de la memoria RAM para evitar que unos programas interfieran con otros, y el control dinámico de los controladores de dispositivos (<em>drivers</em>) que traducen las señales genéricas del núcleo del S.O. a instrucciones de hardware específico.</p>
-
-                        <h3>3. El Ciclo de Procesamiento y la Representación Binaria</h3>
-                        <p>Todo flujo informático responde invariablemente al **Ciclo de Procesamiento de Datos**: Entrada (captura por periféricos), Procesamiento (operaciones de la CPU), Almacenamiento (registro persistente) y Salida (proyección de la información útil).</p>
-                        <p>Dado que los circuitos integrados solo operan con dos niveles discretos de voltaje eléctrico, toda la información compleja de este ciclo se representa mediante el **Sistema Binario** empleando ceros y unos:</p>
-                        <ul>
-                            <li><strong>Bit:</strong> Dígito binario elemental (0 o 1).</li>
-                            <li><strong>Byte:</strong> Secuencia fija de 8 bits que permite codificar hasta 256 combinaciones de datos independientes, base estándar para almacenar un solo carácter alfanumérico usando codificaciones universales como ASCII o Unicode.</li>
-                        </ul>
+            <div class="app-grid">
+                <div class="app-main-info">
+                    <div class="topic-section">
+                        <div class="topic-title"><span>⚙️</span> El Vínculo Indisociable</div>
+                        <p>La informática une dos mundos totalmente dependientes: el <strong>Hardware</strong> (todo lo físico, cables, placas y chips que puedes tocar) y el <strong>Software</strong> (los programas, aplicaciones e instrucciones lógicas invisibles).</p>
+                        <p>Ninguno sirve sin el otro; el hardware es el cuerpo y el software es la mente que le dice qué hacer.</p>
                     </div>
 
-                    <!-- Ficha Técnica Lateral (Infobox de Wikipedia) -->
-                    <div class="infobox">
-                        <h4>Ficha Técnica: Computación</h4>
-                        <table class="infobox-table">
+                    <div class="topic-section">
+                        <div class="topic-title"><span>🤖</span> El Rol de los Algoritmos</div>
+                        <p>Un algoritmo es una lista de pasos ordenados para resolver un problema. En la automatización (como en Arduino), los sensores recopilan datos del entorno, el algoritmo decide qué hacer y los actuadores ejecutan la acción de forma automática.</p>
+                    </div>
+
+                    <details>
+                        <summary>💡 Ver curiosidad del primer "Bug"</summary>
+                        <p style="margin-top: 10px; color: var(--text-muted);">En 1947, una polilla real se quedó atrapada en los circuitos de la computadora Harvard Mark II, causando un fallo general. Los operarios removieron el insecto y lo pegaron en su bitácora llamándolo el primer "bug" (bicho) de la historia. ¡De ahí viene el término depurar o reparar código!</p>
+                    </details>
+                </div>
+
+                <div class="app-sidebar-info">
+                    <div class="app-table-box">
+                        <h3>Resumen del Sistema</h3>
+                        <table class="app-table">
                             <tr>
-                                <td>Unidad Mínima:</td>
-                                <td>Bit (Binary Digit)</td>
+                                <td>Hardware:</td>
+                                <td>Parte Física Fuerte</td>
                             </tr>
                             <tr>
-                                <td>Equivalencia:</td>
-                                <td>1 Byte = 8 Bits</td>
+                                <td>Software:</td>
+                                <td>Sistemas y Programas</td>
                             </tr>
                             <tr>
-                                <td>Estructura Base:</td>
-                                <td>Von Neumann (1945)</td>
-                            </tr>
-                            <tr>
-                                <td>Procesador central:</td>
-                                <td>CPU</td>
-                            </tr>
-                            <tr>
-                                <td>Software Core:</td>
-                                <td>Kernel del S.O.</td>
-                            </tr>
-                            <tr>
-                                <td>Periféricos:</td>
-                                <td>Entrada / Salida / Mixtos</td>
+                                <td>Lógica:</td>
+                                <td>Algoritmos de Control</td>
                             </tr>
                         </table>
-                        <p style="font-size: 0.75rem; text-align: center; color: var(--text-muted); margin-top: 15px; line-height: 1.2;">
-                            Estándares de Fundamentos Tecnológicos Escolares (2026)
-                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fundamentos" class="app-card">
+            <div class="banner-verde" style="background-color: #007791;">
+                Fundamentos del Sistema
+            </div>
+            
+            <div class="app-grid">
+                <div class="app-main-info">
+                    <div class="topic-section">
+                        <div class="topic-title"><span>🧠</span> Arquitectura de Computadoras</div>
+                        <p>Basado en el modelo de <strong>Von Neumann</strong>, los equipos procesan todo con la <strong>CPU</strong> (Unidad Central de Procesamiento), guardan los datos inmediatos en la <strong>Memoria RAM</strong> (veloz pero volátil), y almacenan tus archivos para siempre en discos duros o <strong>SSD</strong>.</p>
                     </div>
 
+                    <div class="topic-section">
+                        <div class="topic-title"><span>🎛️</span> El Sistema Operativo (S.O.)</div>
+                        <p>Es el software maestro de la computadora. Controla los procesos, decide qué programa usa el procesador, reparte la memoria RAM y permite que los drivers entiendan los periféricos conectados al equipo.</p>
+                    </div>
+
+                    <div class="topic-section">
+                        <div class="topic-title"><span>🔢</span> El Universo Binario</div>
+                        <p>Por dentro, los componentes solo entienden impulsos eléctricos: encendido o apagado. Esto se traduce en **Bits** (ceros <code>0</code> y unos <code>1</code>). La agrupación de 8 bits crea un **Byte**, que equivale a una letra o un carácter del teclado.</p>
+                    </div>
                 </div>
-            </section>
 
-            <!-- PIE DE PÁGINA COMÚN -->
-            <footer>
-                <p>Esta página es un recurso educativo de acceso público. Desarrollado con código HTML5/CSS3 puro por Jehasa.</p>
-            </footer>
+                <div class="app-sidebar-info">
+                    <div class="app-table-box">
+                        <h3>Ficha Técnica: Computación</h3>
+                        <table class="app-table">
+                            <tr>
+                                <td>CPU</td>
+                                <td>Procesamiento completo de datos lógicos.</td>
+                            </tr>
+                            <tr>
+                                <td>Memoria RAM</td>
+                                <td>Almacenamiento volátil y ultrarrápido.</td>
+                            </tr>
+                            <tr>
+                                <td>Periféricos</td>
+                                <td>Dispositivos de Entrada/Salida de datos.</td>
+                            </tr>
+                            <tr>
+                                <td>Sistema Operativo</td>
+                                <td>Software base controlador del hardware.</td>
+                            </tr>
+                            <tr>
+                                <td>Automatización</td>
+                                <td>Acciones autónomas mediante sistemas físicos.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        </div>
+        <footer>
+            <p>App de Aprendizaje Digital 2026 • Diseñado por Jehasa</p>
+        </footer>
     </main>
 
-    <!-- LÓGICA MÁGICA JAVASCRIPT -->
     <script>
-        // Cambiar entre pestañas con estilo activo
+        // Función para cambiar de pestañas estilo App Móvil
         function switchTab(tabId) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach(card => card.classList.remove('active'));
 
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
             document.getElementById(tabId).classList.add('active');
-            
-            // Buscar y activar el botón correcto del menú
             event.currentTarget.classList.add('active');
         }
 
-        // Sistema dinámico de Modo Claro y Oscuro
+        // Sistema de cambio de temas visuales
         function toggleTheme() {
             const body = document.body;
             if (body.getAttribute('data-theme') === 'dark') {
