@@ -3,97 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hardware, Software y Fundamentos</title>
+    <title>Infotech Wiki - Enciclopedia de Hardware, Software y Fundamentos</title>
     <style>
         :root {
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --card-bg: #ffffff;
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --border-color: #cccccc;
+            --bg-color: #f6f8fa;
+            --wiki-white: #ffffff;
+            --text-color: #202122;
+            --text-muted: #54595d;
+            --primary-blue: #364d7c;
+            --accent-cyan: #007791;
+            --border-color: #a2a9b1;
+            --sidebar-bg: #f8f9fa;
+            --card-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            --highlight-bg: #eaf3ff;
         }
 
         [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #f0f0f0;
-            --card-bg: #2d2d2d;
-            --primary-color: #ecf0f1;
-            --accent-color: #9b59b6;
+            --bg-color: #121212;
+            --wiki-white: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --primary-blue: #3d70b2;
+            --accent-cyan: #00b4d8;
             --border-color: #444444;
+            --sidebar-bg: #1a1a1a;
+            --card-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            --highlight-bg: #1c2d42;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            display: flex;
+            min-height: 100vh;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        header {
-            background-color: var(--card-bg);
-            border-bottom: 2px solid var(--accent-color);
-            padding: 15px 20px;
+        /* BARRA LATERAL ESTILO WIKIPEDIA */
+        aside {
+            width: 240px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            flex-direction: column;
+            gap: 20px;
+            position: fixed;
+            height: 100vh;
+            box-sizing: border-box;
         }
 
-        h1 {
+        .logo-area h1 {
+            font-size: 1.4rem;
+            color: var(--primary-blue);
             margin: 0;
-            font-size: 1.5rem;
-            color: var(--primary-color);
+            font-family: Georgia, serif;
+            letter-spacing: 0.5px;
         }
 
-        /* Pestañas estilo Menú Navegación */
-        nav {
+        .logo-area span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .tab-btn {
+        .nav-btn {
             background: none;
-            border: 1px solid transparent;
+            border: none;
+            text-align: left;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            font-weight: 600;
             color: var(--text-color);
-            padding: 8px 16px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
             border-radius: 4px;
+            border-left: 4px solid transparent;
             transition: 0.2s;
         }
 
-        .tab-btn:hover {
+        .nav-btn:hover {
             background-color: var(--bg-color);
+            color: var(--accent-cyan);
         }
 
-        .tab-btn.active {
-            background-color: var(--accent-color);
+        .nav-btn.active {
+            background-color: var(--highlight-bg);
+            color: var(--primary-blue);
+            border-left-color: var(--primary-blue);
+        }
+
+        .theme-btn {
+            margin-top: auto;
+            background-color: var(--primary-blue);
             color: white;
-        }
-
-        .theme-toggle {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
             border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 4px;
+            padding: 10px;
             font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
+        .theme-btn:hover {
+            opacity: 0.9;
         }
 
-        /* Control de visualización de pestañas */
+        /* CONTENEDOR PRINCIPAL */
+        main {
+            margin-left: 240px;
+            flex: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .wiki-page {
+            background-color: var(--wiki-white);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
         .tab-content {
             display: none;
         }
@@ -102,92 +141,113 @@
             display: block;
         }
 
-        /* Estilos de tu página anterior (Inicio) */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            margin-top: 0;
+            color: var(--primary-blue);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+            margin-top: 25px;
+        }
+
+        p, li {
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* DISEÑO DE COLUMNAS PARA FUNDAMENTOS */
+        .wiki-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 900px) {
+            .wiki-grid {
+                grid-template-columns: 2.5fr 1fr;
+            }
+        }
+
+        /* FICHA TÉCNICA (INFOBOX) */
+        .infobox {
+            background-color: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--primary-blue);
+            border-radius: 4px;
+            padding: 15px;
+            height: fit-content;
+            font-size: 0.9rem;
+        }
+
+        .infobox h4 {
+            margin: 0 0 10px 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .infobox-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .infobox-table td {
+            padding: 8px 4px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .infobox-table td:first-child {
+            font-weight: bold;
+            color: var(--accent-cyan);
+            width: 45%;
+        }
+
+        /* BLOQUES DE ALERTA O DESTACADOS */
+        .highlight-box {
+            background-color: var(--highlight-bg);
+            border-left: 5px solid var(--accent-cyan);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
         }
 
         details {
-            background-color: var(--card-bg);
+            background-color: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
             padding: 15px;
             border-radius: 6px;
             margin-top: 15px;
             cursor: pointer;
-            border: 1px solid var(--border-color);
         }
 
         summary {
             font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        /* Estilos de la pestaña FUNDAMENTOS (Estilo Wikipedia) */
-        .wiki-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .wiki-container {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        .wiki-main h2 {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-            color: var(--accent-color);
-        }
-
-        .wiki-sidebar {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-top: 4px solid var(--accent-color);
-            padding: 15px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            height: fit-content;
-        }
-
-        .wiki-sidebar h3 {
-            margin-top: 0;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-
-        .wiki-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        .wiki-table td {
-            padding: 6px 4px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .wiki-table td:first-child {
-            font-weight: bold;
-            color: var(--accent-color);
-            width: 40%;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
         }
 
         footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #777;
             margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
         }
     </style>
     
-    <!-- Tu código de Google para la barra de búsqueda que guardamos hace rato -->
+    <!-- Metadato de Google para el motor de búsqueda indexado -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -203,120 +263,147 @@
 </head>
 <body>
 
-    <header>
-        <h1>Infotech Digital</h1>
-        <nav>
-            <button class="tab-btn active" onclick="switchTab('inicio')">Inicio</button>
-            <button class="tab-btn" onclick="switchTab('fundamentos')">Fundamentos</button>
-        </nav>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓 Modo</button>
-    </header>
-
-    <div class="container">
+    <!-- MENÚ LATERAL ESTILO WIKIPEDIA -->
+    <aside>
+        <div class="logo-area">
+            <h1>Infotech Wiki</h1>
+            <span>Enciclopedia Libre</span>
+        </div>
         
-        <!-- PESTAÑA 1: INICIO (Tu contenido original) -->
-        <section id="inicio" class="tab-content active">
-            <div class="card">
-                <h2>Hardware vs Software</h2>
-                <p>El <strong>Hardware</strong> es la parte física que puedes tocar de una computadora (los circuitos, la pantalla, el teclado). El <strong>Software</strong> son las instrucciones digitales, los programas y aplicaciones que le dicen al hardware qué hacer.</p>
+        <nav class="nav-menu">
+            <button class="nav-btn active" onclick="switchTab('inicio')">🏠 Inicio</button>
+            <button class="nav-btn" onclick="switchTab('fundamentos')">📚 Fundamentos</button>
+        </nav>
+        
+        <button class="theme-btn" onclick="toggleTheme()">🌓 Cambiar Modo</button>
+    </aside>
+
+    <!-- CUERPO DE LA PÁGINA -->
+    <main>
+        <div class="wiki-page">
+            
+            <!-- SECCIÓN 1: INICIO (Hardware vs Software) -->
+            <section id="inicio" class="tab-content active">
+                <h2>Hardware y Software</h2>
+                <p>En el ámbito de la informática, los sistemas de computación se dividen en dos pilares fundamentales e interdependientes: el <strong>Hardware</strong> (la infraestructura física) y el <strong>Software</strong> (el conjunto de componentes lógicos o programas).</p>
                 
+                <div class="highlight-box">
+                    <strong>Definición rápida:</strong> El hardware es todo aquello que puedes golpear físicamente; el software es la parte a la que solo le puedes gritar cuando falla.
+                </div>
+
+                <h3>El Vínculo Indisociable</h3>
+                <p>Ninguno de los dos puede funcionar de forma aislada. El hardware requiere de instrucciones precisas del software para saber cómo operar los voltajes eléctricos, mientras que el software necesita una plataforma física real donde almacenar sus bits y ejecutar sus procesos lógicos.</p>
+
                 <details>
-                    <summary>¿Sabías qué? (Curiosidades de la informática)</summary>
-                    <p style="margin-top: 10px;">¿Sabías que el primer error informático o "bug" fue una polilla real? En 1947, los científicos encontraron una polilla atrapada en un relé de la computadora Harvard Mark II que estaba causando fallas. De ahí viene el término "debugging" (depuración).</p>
+                    <summary>💡 Curiosidad Histórica: El origen del "Bug"</summary>
+                    <p style="margin-top: 10px;">¿Sabías que el primer error informático documentado fue causado por un insecto real? En septiembre de 1947, la científica Grace Hopper encontró una polilla atrapada en los relés de la gigantesca computadora Harvard Mark II. Al removerla del circuito, pegó el insecto en su bitácora con la nota "Primer caso real de bug encontrado". Desde entonces, resolver problemas de código se llama <em>debugging</em> (depuración).</p>
                 </details>
 
                 <details>
-                    <summary>¿Quieres saber más sobre algoritmos?</summary>
-                    <p style="margin-top: 10px;">Un algoritmo es una serie de pasos ordenados para resolver un problema. En la automatización, los sensores detectan cambios en el entorno (como la humedad o el movimiento) y ejecutan un algoritmo para activar actuadores (como motores o luces) de forma automática.</p>
+                    <summary>🤖 El Rol de los Algoritmos en la Automatización</summary>
+                    <p style="margin-top: 10px;">Un algoritmo es una secuencia lógica, finita y bien definida de pasos mecánicos diseñados para solucionar un problema. En los modernos sistemas de automatización, los sensores leen datos físicos del mundo real (humedad, temperatura, proximidad), el software ejecuta un algoritmo condicional y, finalmente, envía señales de potencia a los actuadores (motores, bombas de agua, pantallas) para interactuar autónomamente con el entorno.</p>
                 </details>
-            </div>
-        </section>
+            </section>
 
-        <!-- PESTAÑA 2: FUNDAMENTOS (Estilo Wikipedia) -->
-        <section id="fundamentos" class="tab-content">
-            <div class="wiki-container">
-                
-                <!-- Columna principal estilo artículo -->
-                <div class="wiki-main">
-                    <h2>Fundamentos de la Informática</h2>
-                    <p>Los <strong>fundamentos informáticos</strong> abarcan las bases sobre las cuales opera la tecnología moderna. Se centran en el estudio de cómo la información se procesa, almacena y transmite mediante la interacción entre sistemas operativos y componentes de hardware esenciales.</p>
+            <!-- SECCIÓN 2: FUNDAMENTOS (Mucha información detallada) -->
+            <section id="fundamentos" class="tab-content">
+                <div class="wiki-grid">
                     
-                    <h3>1. El Sistema Operativo (S.O.)</h3>
-                    <p>Es el programa principal de la computadora. Su función es actuar como intermediario entre el usuario y el hardware de la máquina. Administra los recursos del sistema, como la memoria y el almacenamiento.</p>
-                    <p><em>Ejemplos comunes:</em> Microsoft Windows, GNU/Linux, macOS, Android e iOS.</p>
+                    <!-- Columna de Artículos -->
+                    <div class="wiki-main">
+                        <h2>Fundamentos de las Ciencias de la Computación</h2>
+                        <p>Los <strong>fundamentos informáticos</strong> constituyen los pilares teóricos y prácticos que rigen la arquitectura computacional moderna, el modelado de datos y los sistemas operativos encargados de orquestar la tecnología del siglo XXI.</p>
+                        
+                        <h3>1. Arquitectura de Computadoras (Von Neumann)</h3>
+                        <p>Casi la totalidad de los dispositivos informáticos comerciales se estructuran bajo el modelo clásico de la <strong>Arquitectura de Von Neumann</strong> de 1945. Esta describe una computadora digital con cuatro subsistemas clave conectados mediante canales de comunicación compartidos conocidos como <em>buses</em>:</p>
+                        <ul>
+                            <li><strong>Unidad Central de Procesamiento (CPU):</strong> Considerada el núcleo operativo o "cerebro". Alberga la Unidad de Control (UC) encargada de decodificar instrucciones, y la Unidad Aritmético Lógica (ALU) que procesa las operaciones matemáticas y booleanas.</li>
+                            <li><strong>Memoria RAM:</strong> Almacenamiento primario volátil. Retiene a velocidades extremas los datos de los procesos en ejecución activa. Pierde toda su información al cesar el suministro eléctrico.</li>
+                            <li><strong>Memoria Secundaria:</strong> Unidades de almacenamiento masivo y permanente, como los discos de estado sólido (SSD) o discos mecánicos (HDD). Guardan la información de manera persistente.</li>
+                            <li><strong>Buses del Sistema:</strong> Líneas eléctricas de comunicación que transportan direcciones físicas de memoria, bloques de datos puros y señales de sincronismo/control.</li>
+                        </ul>
 
-                    <h3>2. La Unidad Central de Procesamiento (CPU)</h3>
-                    <p>Conocida frecuentemente como el "cerebro" del equipo. La CPU se encarga de interpretar las instrucciones de los programas y procesar los datos esenciales de todas las tareas. Su velocidad se mide actualmente en gigahercios (GHz).</p>
+                        <h3>2. El Sistema Operativo como Gestor de Recursos</h3>
+                        <p>El <strong>Sistema Operativo (S.O.)</strong> es la capa de software de bajo nivel más importante de una máquina. Su propósito primordial es administrar de manera eficiente, equitativa y segura el hardware, proveyendo a su vez una interfaz de abstracción para el usuario y los programas de aplicación.</p>
+                        <p>Entre sus misiones principales destacan la planificación multitarea de la CPU, el aislamiento seguro de la memoria RAM para evitar que unos programas interfieran con otros, y el control dinámico de los controladores de dispositivos (<em>drivers</em>) que traducen las señales genéricas del núcleo del S.O. a instrucciones de hardware específico.</p>
 
-                    <h3>3. Periféricos de Entrada y Salida</h3>
-                    <p>Son los dispositivos encargados de comunicar a la computadora con el mundo exterior:</p>
-                    <ul>
-                        <li><strong>Entrada:</strong> Permiten introducir datos al sistema (Teclado, mouse, sensores de humedad).</li>
-                        <li><strong>Salida:</strong> Muestran o proyectan la información procesada (Pantalla, cornetas, relés o bombas de agua activadas).</li>
-                    </ul>
+                        <h3>3. El Ciclo de Procesamiento y la Representación Binaria</h3>
+                        <p>Todo flujo informático responde invariablemente al **Ciclo de Procesamiento de Datos**: Entrada (captura por periféricos), Procesamiento (operaciones de la CPU), Almacenamiento (registro persistente) y Salida (proyección de la información útil).</p>
+                        <p>Dado que los circuitos integrados solo operan con dos niveles discretos de voltaje eléctrico, toda la información compleja de este ciclo se representa mediante el **Sistema Binario** empleando ceros y unos:</p>
+                        <ul>
+                            <li><strong>Bit:</strong> Dígito binario elemental (0 o 1).</li>
+                            <li><strong>Byte:</strong> Secuencia fija de 8 bits que permite codificar hasta 256 combinaciones de datos independientes, base estándar para almacenar un solo carácter alfanumérico usando codificaciones universales como ASCII o Unicode.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Ficha Técnica Lateral (Infobox de Wikipedia) -->
+                    <div class="infobox">
+                        <h4>Ficha Técnica: Computación</h4>
+                        <table class="infobox-table">
+                            <tr>
+                                <td>Unidad Mínima:</td>
+                                <td>Bit (Binary Digit)</td>
+                            </tr>
+                            <tr>
+                                <td>Equivalencia:</td>
+                                <td>1 Byte = 8 Bits</td>
+                            </tr>
+                            <tr>
+                                <td>Estructura Base:</td>
+                                <td>Von Neumann (1945)</td>
+                            </tr>
+                            <tr>
+                                <td>Procesador central:</td>
+                                <td>CPU</td>
+                            </tr>
+                            <tr>
+                                <td>Software Core:</td>
+                                <td>Kernel del S.O.</td>
+                            </tr>
+                            <tr>
+                                <td>Periféricos:</td>
+                                <td>Entrada / Salida / Mixtos</td>
+                            </tr>
+                        </table>
+                        <p style="font-size: 0.75rem; text-align: center; color: var(--text-muted); margin-top: 15px; line-height: 1.2;">
+                            Estándares de Fundamentos Tecnológicos Escolares (2026)
+                        </p>
+                    </div>
+
                 </div>
+            </section>
 
-                <!-- Columna lateral - Ficha técnica estilo Wikipedia -->
-                <div class="wiki-sidebar">
-                    <h3>Ficha Técnica: Computación</h3>
-                    <table class="wiki-table">
-                        <tr>
-                            <td>Unidad Base:</td>
-                            <td>Bit (0 o 1)</td>
-                        </tr>
-                        <tr>
-                            <td>Cerebro:</td>
-                            <td>CPU (Procesador)</td>
-                        </tr>
-                        <tr>
-                            <td>Software Base:</td>
-                            <td>Sistema Operativo</td>
-                        </tr>
-                        <tr>
-                            <td>Interacción:</td>
-                            <td>Periféricos (E/S)</td>
-                        </tr>
-                    </table>
-                    <p style="font-size: 0.8rem; margin-top: 15px; color: #777; text-align: center;">
-                        Fundamentos Tecnológicos Básicos (2026)
-                    </p>
-                </div>
+            <!-- PIE DE PÁGINA COMÚN -->
+            <footer>
+                <p>Esta página es un recurso educativo de acceso público. Desarrollado con código HTML5/CSS3 puro por Jehasa.</p>
+            </footer>
 
-            </div>
-        </section>
+        </div>
+    </main>
 
-    </div>
-
-    <footer>
-        <p>Creado con código puro por Jehasa - Proyecto Escolar Informativo</p>
-    </footer>
-
-    <!-- CÓDIGO JAVASCRIPT: Controla el cambio de pestañas y el Modo Oscuro -->
+    <!-- LÓGICA MÁGICA JAVASCRIPT -->
     <script>
-        // Función mágica para cambiar de pestañas (Opción 1)
+        // Cambiar entre pestañas con estilo activo
         function switchTab(tabId) {
-            // Ocultar todos los contenidos de pestañas
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // Desactivar el estilo de todos los botones
-            const buttons = document.querySelectorAll('.tab-btn');
+            const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Mostrar la pestaña seleccionada y activar su botón
             document.getElementById(tabId).classList.add('active');
             
-            // Buscar cuál botón activó la función para ponerle el color activo
+            // Buscar y activar el botón correcto del menú
             event.currentTarget.classList.add('active');
         }
 
-        // Función del Modo Oscuro
+        // Sistema dinámico de Modo Claro y Oscuro
         function toggleTheme() {
-            const currentTheme = document.body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.body.removeAttribute('data-theme');
+            const body = document.body;
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
             } else {
-                document.body.setAttribute('data-theme', 'dark');
+                body.setAttribute('data-theme', 'dark');
             }
         }
     </script>
